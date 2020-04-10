@@ -28,6 +28,21 @@ class Game:
                 s=s+('\u2500'*3+'\u253c')*2+'\u2500'*3+'\n'
         return s
 
+    def columncheck(self)
+        if (self.sign(0,0)==self.sign(0,1) and self.sign(0,0)==self.sign(0,2)) or (self.sign(1,0)==self.sign(1,1) and self.sign(1,0)==self.sign(1,2)) or (self.sign(2,0)==self.sign(2,1) and self.sign(2,0)==self.sign(2,2)):
+            return True
+        return False
+
+    def rowcheck(self):
+        if (self.sign(0,0)==self.sign(1,0) and self.sign(0,0)==self.sign(2,0)) or (self.sign(0,1)==self.sign(1,1) and self.sign(0,1)==self.sign(2,1)) or (self.sign(0,2)==self.sign(1,2) and self.sign(0,2)==self.sign(2,2)):
+            return True
+        return False
+
+    def diagcheck(self):
+        if (self.sign(0,0)==self.sign(1,1) and self.sign(0,0)==self.sign(2,2)) or (self.sign(2,0)==self.sign(1,1) and self.sign(2,0)==self.sign(0,2)):
+            return True
+        return False
+        
     def move(self, player, x, y):
         if self.sign(x,y)==' ':
             return False
