@@ -1,11 +1,11 @@
+from random import randint
 class Game:
 
     def __init__(self, players=1):
         if players<1:
-            players=1
+            self._players=1
         elif players>2:
-            players=2
-        self._players=players
+            self._players=2
         self._data=[[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
 
     def sign(self, x, y):
@@ -42,7 +42,12 @@ class Game:
         if (self.sign(0,0)==self.sign(1,1) and self.sign(0,0)==self.sign(2,2)) or (self.sign(2,0)==self.sign(1,1) and self.sign(2,0)==self.sign(0,2)):
             return True
         return False
-        
+
+    def wincheck(self):
+        if self.columncheck() or self.rowcheck() or self.diagcheck():
+            return True
+        return False
+    
     def move(self, player, x, y):
         if self.sign(x,y)==' ':
             return False
