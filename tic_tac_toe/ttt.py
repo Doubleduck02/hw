@@ -6,10 +6,10 @@ class Game:
             self._players=1
         elif players>2:
             self._players=2
-        self._data=[[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+        self._board=[[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
 
     def sign(self, x, y):
-        return self._data[y][x]
+        return self._board[y][x]
 
     def playersign(self, player):
         if player==1:
@@ -49,10 +49,15 @@ class Game:
         return False
     
     def move(self, player, x, y):
-        if self.sign(x,y)==' ':
+        if self.sign(x,y)!=' ':
             return False
-        self._data[y][x]=self.playersign(player)
+        self._board[y][x]=self.playersign(player)
         return True
+
+    def botmove(self):
+        for y in range(3):
+            for x in range(3):
+                if self.sign(x,y)==' ':
 
 gm=Game()
 print(gm.draw())
