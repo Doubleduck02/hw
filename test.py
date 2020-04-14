@@ -12,4 +12,3 @@ def check5(x):
 #while not check5(randint(1,5)):
     #pass
 #print("it's %s"%('5')) 
-print(f'{randint(1,10):02}')
