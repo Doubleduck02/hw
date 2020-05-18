@@ -1,4 +1,9 @@
 from random import randint
+
+def check123(x):
+    if x=='1' or x=='2' or x=='3':
+        return True
+    return False
 class Game:
 
     def __init__(self, players=1, p1sign='o', p2sign='x'):
@@ -90,11 +95,14 @@ class Game:
 
     def playermove(self, player):
         while True:
-            x=int(input('Column: '))
-            y=int(input('Row: '))
-            if x in range(1,4) and y in range(1,4):
-                if self.move(player,x-1,y-1):
-                    return True
+            xinput=input('Column: ')
+            yinput=input('Row: ')
+            if check123(xinput) and check123(yinput):
+                x=int(xinput)
+                y=int(yinput)
+                if x in range(1,4) and y in range(1,4):
+                    if self.move(player,x-1,y-1):
+                        return True
             print('Please choose again')
             
     def match(self, p1score=0, p2score=0, bot=True):
