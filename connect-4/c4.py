@@ -35,14 +35,15 @@ class Game:
     def draw(self):
         s='  1   2   3   4   5   6   7\n'
         for y in range(6):
-            s=s+' '
             for x in range(7):
                 if x==6:
-                    s=s+' '+self.sign(x,y)+'\n'
+                    s=s+'\u2502 '+self.sign(x,y)+' \u2502\n'
                 else:
-                    s=s+' '+self.sign(x,y)+' \u2502'
+                    s=s+'\u2502 '+self.sign(x,y)+' '
             if y<5:
-                s=s+' '+('\u2500'*3+'\u253c')*6+'\u2500'*3+'\n'
+                s=s+('\u2502'+' '*3)*7+'\u2502\n'
+            else:
+                s=s+'\u2514'+('\u2500'*3+'\u2534')*6+'\u2500'*3+'\u2518'
         return s
 
     def wincheck(self):
