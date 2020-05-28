@@ -7,6 +7,7 @@ class Game:
         elif players>2:
             self.players=2
         self._board=[]
+        self.boardset()
         if len(p1sign)!=1:
             p1sign='o'
         if len(p2sign)!=1:
@@ -99,3 +100,6 @@ class Game:
                             break
                         if i==3:
                             return True
+
+game=Game()
+print(game.wincheck())
