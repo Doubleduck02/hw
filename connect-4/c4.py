@@ -100,6 +100,13 @@ class Game:
                             break
                         if i==3:
                             return True
+    
+    def move(self, player, x):
+        for i in range(6):
+            if self.sign(x,i)!=' ':
+                
+            
+
 
 game=Game()
 print(game.wincheck())
