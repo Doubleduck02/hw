@@ -1,7 +1,7 @@
 from random import randint
 
 def check1to7(x):
-    if x in range(1,8):
+    if x in ['1', '2', '3', '4', '5', '6', '7']:
         return True
     return False
 
@@ -11,7 +11,6 @@ class Game:
             self.players=1
         elif players>2:
             self.players=2
-        self._board=[]
         self.boardset()
         if len(p1sign)!=1:
             p1sign='o'
@@ -22,6 +21,7 @@ class Game:
 
     def boardset(self, x_size=7,y_size=6):
         x=[]
+        self._board=[]
         for i in range(x_size):
             x.append(' ')
         for i in range(y_size):
@@ -107,15 +107,18 @@ class Game:
                             return True
     
     def move(self, player, x):
+        if self.sign(x,0)!=' ' and player!=0:
+            return False
         for i in range(6):
             if self.sign(x,i)!=' ':
                 if player==0:
                     self._board[i][x]=' '
                     return True
-                elif i!=0:
+                if i!=0:
                     self._board[i-1][x]=self.playersign(player)
                     return True
-                return False
+        self._board[i][x]=self.playersign(player)
+        return True
     
     def botmove(self):
         for x in range(7):
@@ -133,11 +136,34 @@ class Game:
             xinput=input('Column: ')
             if check1to7(xinput):
                 x=int(xinput)
-                if x in range(1,4) and y in range(1,4):
-                    if self.move(player,x-1):
-                        return True
+                if self.move(player,x-1):
+                    return True
             print('Please choose again')
 
+    def match(self, p1score=0, p2score=0, bot=True):
+        self.boardset()
+        player=randint(1,2)
+        print('Player %s turn'%(self.playersign(player)))
+        print(f'{self.playersign(1)}    {p1score:2}:{p2score:2}    {self.playersign(2)}')
+        print(self.draw())
+        for i in range(6*7):
+            if player==1:
+                self.playermove(1)
+                if self.wincheck():
+                    return 1
+                player=2
+            elif player==2:
+                if bot:
+                    self.botmove()
+                else:
+                    self.playermove(2)
+                if self.wincheck():
+                    return 2
+                player=1
+            print('Player %s turn'%(self.playersign(player)))
+            print(f'{self.playersign(1)}    {p1score:2}:{p2score:2}    {self.playersign(2)}')
+            print(self.draw())
+        return 0
 
 game=Game()
-print(game.wincheck())
+print(game.match())
