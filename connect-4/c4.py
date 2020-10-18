@@ -117,7 +117,7 @@ class Game:
                 if i!=0:
                     self._board[i-1][x]=self.playersign(player)
                     return True
-        self._board[i][x]=self.playersign(player)
+        self._board[5][x]=self.playersign(player)
         return True
     
     def botmove(self):
