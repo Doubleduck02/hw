@@ -1,11 +1,48 @@
 from random import randint
+from os import system
+from msvcrt import getch
 
 def check123(x):
     if x=='1' or x=='2' or x=='3':
         return True
     return False
 class Game:
+    '''
+    Game (players = 1, p1sign = 'o', p2sign = 'x')
 
+        init:
+            players - ammount of players playing the game. If set above 2, it will change to 2, if set less than 1 it will change to 1
+            p1sign, p2sign - the sign which players will use to play. If set to something shorter or longer than 1 it will change to the default value
+
+        Game.boardset() - sets the board to empty
+
+        Game.playersign(player) - returns the sign of given player
+
+        Game.sign(x,y) - returns the sign on the board
+
+        Game.draw() - returns the drawn board with the coordinates
+
+        Game.columncheck() - checks columns for a win situation
+        
+        Game.rowncheck() - checks rows for a win situation
+
+        Game.diagcheck() - checks diagonals for a win situation
+
+        Game.wincheck() - checks the whole board for a win situation using the last 3 functions
+
+        Game.move(player, x, y) - checks the board for empty space and moves if there is (also used to remove the sign if the player is set to 0)
+            returns if move was made
+        
+        Game.botmove() - checks the bot's move to win, if not then to block the player, then randomly moves if neither
+
+        Game.playermove(player) - prompts the player to choose the move
+
+        Game.match(p1score=0, p2score=0, bot=True) - makes a match of tic-tac-toe
+            returns which player wins (0 if draw)
+
+        Game.game(winpoint = 5) - keeps repeating matches until one of the players reaches winpoint
+            returns message about who wins the game
+    '''
     def __init__(self, players=1, p1sign='o', p2sign='x'):
         if players<1:
             self.players=1
@@ -125,6 +162,7 @@ class Game:
                 if self.wincheck():
                     return 2
                 player=1
+            system('cls')
             print('Player %s turn'%(self.playersign(player)))
             print(f'{self.playersign(1)}    {p1score:2}:{p2score:2}    {self.playersign(2)}')
             print(self.draw())
@@ -135,6 +173,7 @@ class Game:
         p2score=0
         while True:
             match=self.match(p1score, p2score)
+            system('cls')
             if match==1:
                 p1score+=1
                 print('Player %s wins the match'%(self._p1sign))
@@ -149,7 +188,9 @@ class Game:
                 return f'Player {self._p1sign} wins the game'
             elif p2score==winpoint:
                 return f'Player {self._p2sign} wins the game'
-
+            print('Press any key to continue')
+            getch()
+            system('cls')
 
 
 gm=Game()
